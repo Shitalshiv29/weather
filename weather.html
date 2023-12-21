@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 250px;
+            width:250px ;
+            background-image: linear-gradient(white,rgb(151, 149, 140));
+            margin-left: 400px;
+            margin-top: 100px;
+            border-radius: 25px;
+            color:rgb(94, 94, 172);
+            font-weight: 900;
+            text-align: center;
+        }
+        body{
+            background-image: url("https://i.pinimg.com/736x/21/b0/c6/21b0c61147c6a8eefb91633fd9f467b5.jpg");
+        }
+                     
+    </style>
+</head>
+<body>
+    
+    <div class="box"> 
+        <input type=" text" id="city" placeholder=" enter your city" style="border-radius: 15px;">
+        <button style="border-radius: 5px;" onclick="getData()"><b>&#128269</b></button><br>
+        <span  style="font-size: larger;" id="info"></span><br><br><br><br>
+        <span style="font-size: larger;" id="temp"></span><br>
+        <span style="font-size: larger;" id="wind"></span><br>
+        <span style="font-size: larger;" id="humidity"></span><br>
+        <span style="font-size: larger;" id="pressure"></span><br>
+        <span style="font-size: larger;" id="height"></span><br>
+    </div>
+
+<script>
+    async function getData(){
+        
+        const cityName=document.getElementById('city').value;
+
+    const api=`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=da5f4a1de286a890867b28b2272b8a5a`;
+
+                   const res= await fetch(api);
+                   const data = await res.json();
+
+                   document.getElementById("info").innerHTML=`weather in ${cityName}`;
+                   document.getElementById("temp").innerHTML=`${Math.trunc(data.main.temp/10)}°C`;
+                   document.getElementById("wind").innerHTML=`wind: ${data.wind.speed}km/h`;
+                   document.getElementById("humidity").innerHTML=`humidity: ${data.main.humidity}%`;
+                   document.getElementById("pressure").innerHTML=`pressure: ${data.main.pressure}p`;
+                   document.getElementById("pressure").innerHTML=`height: ${data.main.grnd_level}m`;
+                }
+
+</script>
+    
+</body>
+</html>
